@@ -1,0 +1,12 @@
+@demo_HostAddress = http://localhost:5118
+
+POST   {{demo_HostAddress}}/api/comment
+Accept: application/json
+Content-Type: application/json
+
+{
+    "title": "BuyStock",
+  "content": "day traders are upcoming profitabe stock",
+   "stockId": 13
+}
+###
