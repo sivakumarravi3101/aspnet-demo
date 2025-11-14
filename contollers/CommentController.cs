@@ -52,7 +52,31 @@ namespace demo.contollers
 
             var comments=createComment.ToCommentFromCreate(StockId);
             await _CommentRepo.CreateAsync(comments);
-            return CreatedAtAction(nameof(GetCommentById),new{id=comments},comments.ToCommentDto());
+            return CreatedAtAction(nameof(GetCommentById),new{id=comments.Id},comments.ToCommentDto());
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult>UpdateComment([FromRoute] int id,[FromBody] UpdateStockRequestDto updateComment)
+        {
+            var comment =await _CommentRepo.UpdateAsync(id,updateComment.ToCommentFromUpdate());
+            if (comment == null)
+            {
+                return NotFound("comments not found");
+            }
+            return Ok(comment.ToCommentDto());
+
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult>DeleteComment([FromRoute]int id)
+        {
+            var comment=await _CommentRepo.DeleteAsync(id);
+            if(comment==null)
+            {
+                NotFound("comment is not found");
+            }
+            return NoContent();
         }
     }
 }

@@ -13,5 +13,9 @@ namespace demo.interfaces
        public Task<Comment> GetCommentById(int id);
 
        public Task<Comment?>CreateAsync(Comment commentModel);
+
+       public Task<Comment?>UpdateAsync(int id,Comment commentModel);
+
+       public Task<Comment?>DeleteAsync(int id);
     }
 }
